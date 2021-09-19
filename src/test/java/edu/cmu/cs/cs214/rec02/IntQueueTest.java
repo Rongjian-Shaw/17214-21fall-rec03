@@ -32,8 +32,8 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-        // mQueue = new ArrayIntQueue();
+//        mQueue = new LinkedIntQueue();
+         mQueue = new ArrayIntQueue();
     }
 
     @Test
@@ -62,7 +62,9 @@ public class IntQueueTest {
 
             // Used boxed type to pacify assertEquals overload resolution
             for (Integer result : correctResult) {
-                assertEquals(mQueue.dequeue(), result);
+                System.out.println(result);
+                System.out.println(mQueue.peek());
+                assertEquals(result, mQueue.dequeue());
             }
         }
     }

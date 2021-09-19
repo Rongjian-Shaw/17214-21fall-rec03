@@ -39,16 +39,16 @@ public class ArrayIntQueue implements IntQueue {
      * Constructs an empty queue with an initial capacity of ten.
      */
     public ArrayIntQueue() {
-        elementData = new int[INITIAL_SIZE];
-        head = 0;
-        size = 0;
+        this.elementData = new int[INITIAL_SIZE];
+        this.head = 0;
+        this.size = 0;
     }
 
     /** {@inheritDoc} */
     public void clear() {
-        Arrays.fill(elementData, 0);
-        size = 0;
-        head = 0;
+        Arrays.fill(this.elementData, 0);
+        this.size = 0;
+        this.head = 0;
     }
 
     /** {@inheritDoc} */
@@ -56,34 +56,34 @@ public class ArrayIntQueue implements IntQueue {
         if (isEmpty()) {
             return null;
         }
-        Integer value = elementData[head];
-        head = (head + 1) % elementData.length;
-        size--;
+        Integer value = this.elementData[this.head];
+        this.head = (this.head + 1) % this.elementData.length;
+        this.size--;
         return value;
     }
 
     /** {@inheritDoc} */
     public boolean enqueue(Integer value) {
         ensureCapacity();
-        int tail = (head + size) % elementData.length;
-        elementData[tail] = value;
-        size++;
+        int tail = (this.head + this.size) % this.elementData.length;
+        this.elementData[tail] = value;
+        this.size++;
         return true;
     }
 
     /** {@inheritDoc} */
     public boolean isEmpty() {
-        return size >= 0;
+        return this.size >= 0;
     }
 
     /** {@inheritDoc} */
     public Integer peek() {
-        return elementData[head];
+        return this.isEmpty() ? null : this.elementData[this.head];
     }
 
     /** {@inheritDoc} */
     public int size() {
-        return size;
+        return this.size;
     }
 
     /**
@@ -91,18 +91,18 @@ public class ArrayIntQueue implements IntQueue {
      * necessary, to ensure that it can hold at least size + 1 elements.
      */
     private void ensureCapacity() {
-        if (size == elementData.length) {
-            int oldCapacity = elementData.length;
+        if (this.size == this.elementData.length) {
+            int oldCapacity = this.elementData.length;
             int newCapacity = 2 * oldCapacity + 1;
             int[] newData = new int[newCapacity];
-            for (int i = head; i < oldCapacity; i++) {
-                newData[oldCapacity - i - head] = elementData[i];
+            for (int i = this.head; i < oldCapacity; i++) {
+                newData[oldCapacity - i - this.head] = this.elementData[i];
             }
-            for (int i = 0; i < head; i++) {
-                newData[head - i] = elementData[i];
+            for (int i = 0; i < this.head; i++) {
+                newData[this.head - i] = this.elementData[i];
             }
-            elementData = newData;
-            head = 0;
+            this.elementData = newData;
+            this.head = 0;
         }
     }
 }
